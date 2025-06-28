@@ -32,3 +32,5 @@ func _ready():
 			atlas_texture.atlas = texture
 			atlas_texture.region = Rect2(frame_size * frame_i, frame_size * dir_i, frame_size, frame_size)
 			sprite_frames.add_frame(animation_name, atlas_texture, frame_duration)
+
+	play("idle.0")

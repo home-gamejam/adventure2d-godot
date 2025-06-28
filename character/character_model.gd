@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node
 
 class_name CharacterModel
 
@@ -23,6 +23,7 @@ enum CharacterStateType {
 Character model members
 """
 
+@export var body: CharacterBody2D
 @export var walk_speed: float = 300.0
 
 var move_speed = walk_speed
@@ -62,17 +63,17 @@ func _update_move(input: InputData, _delta: float) -> void:
 
 	if input.direction == Vector2.ZERO:
 		move_speed = walk_speed
-		velocity.x = move_toward(velocity.x, 0, move_speed)
-		velocity.y = move_toward(velocity.y, 0, move_speed)
+		body.velocity.x = move_toward(body.velocity.x, 0, move_speed)
+		body.velocity.y = move_toward(body.velocity.y, 0, move_speed)
 
-		move_and_slide()
+		body.move_and_slide()
 
-		if velocity.length() < .1:
+		if body.velocity.length() < .1:
 			state_type = CharacterStateType.Idle
 	else:
 		move_speed = walk_speed * (2 if input.is_running else 1)
-		velocity.x = input.direction.x * move_speed
-		velocity.y = input.direction.y * move_speed
+		body.velocity.x = input.direction.x * move_speed
+		body.velocity.y = input.direction.y * move_speed
 
 		if input.direction.x < 0:
 			animation_direction = AnimationDirection.W
@@ -83,7 +84,7 @@ func _update_move(input: InputData, _delta: float) -> void:
 		else:
 			animation_direction = AnimationDirection.S
 
-		move_and_slide()
+		body.move_and_slide()
 
 
 """

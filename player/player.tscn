@@ -596,27 +596,36 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node" node_paths=PackedStringArray("input_source", "model", "view")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_source", "model", "view")]
 script = ExtResource("1_g1dw6")
 input_source = NodePath("Input")
 model = NodePath("Model")
 view = NodePath("View")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25)
+shape = SubResource("CapsuleShape2D_g6k8r")
+
 [node name="Input" type="Node" parent="."]
 script = ExtResource("2_qjkh3")
 metadata/_custom_type_script = "uid://dx5u6647cwuvp"
 
-[node name="Model" type="CharacterBody2D" parent="."]
-motion_mode = 1
+[node name="Model" type="Node" parent="." node_paths=PackedStringArray("body")]
 script = ExtResource("3_yw30f")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Model"]
-position = Vector2(0, 25)
-shape = SubResource("CapsuleShape2D_g6k8r")
+body = NodePath("..")
 
 [node name="View" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_anp34")
+animation = &"idle.0"
 script = ExtResource("4_qjkh3")
 texture = ExtResource("2_yw30f")
+metadata/_custom_type_script = "uid://dvbjdpkqbnoiv"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.4
+drag_top_margin = 0.4
+drag_right_margin = 0.4
+drag_bottom_margin = 0.4
+editor_draw_drag_margin = true

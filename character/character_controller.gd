@@ -13,8 +13,6 @@ func _physics_process(delta: float) -> void:
 	var input = input_source.get_input()
 	model.update(input, delta)
 
-	view.position = model.position
-
 	var animation_changed = prev_animation != model.animation or prev_animation_direction != model.animation_direction
 	if animation_changed:
 		view.play(model.animation + "." + str(model.animation_direction))
